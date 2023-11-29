@@ -18,6 +18,9 @@ app.use(cookieParser());
 // Upload route
 app.use("/api", require("./routes/upload"));
 
+// Get product route
+app.use("/api", require("./routes/getProducts"));
+
 // This should be the last route else any after it won't work
 app.all("*", (req, res) => {
   res.status(404).json({

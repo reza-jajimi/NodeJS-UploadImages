@@ -1,6 +1,6 @@
 const product = require("../models/productModel");
 
-const postProperty = async (req, res) => {
+const postProduct = async (req, res) => {
   const { title, price, description } = req.body;
 
   const reqFiles = [];
@@ -25,4 +25,21 @@ const postProperty = async (req, res) => {
   });
 };
 
-module.exports = postProperty;
+const getProducts = async (req, res) => {
+  const allProducts = await product.find().exec();
+
+  if (!allProducts) {
+    return res.sendStatus(400);
+  }
+
+  if (allProducts === 0) {
+    return res.json("There are no products available.");
+  }
+
+  return res.json({
+    result: allProducts,
+    message: "All product was successfully loaded",
+  });
+};
+
+module.exports = { postProduct, getProducts };
