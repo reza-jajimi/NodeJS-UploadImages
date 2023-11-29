@@ -7,4 +7,8 @@ I am going to build a simple application using node.js which is capable of uploa
 
 In this code I upload images with a Node.js backend using Multer and Express
 
+
 Author: Reza Jajimi
+
+Email: jajimi.reza@gmail.com
+
