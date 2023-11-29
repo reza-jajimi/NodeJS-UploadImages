@@ -1,21 +1,23 @@
 const product = require("../models/productModel");
 
-const uploadUrl = "http://localhost:4000/public";
-
-//======================================= Add product ============================================
 const postProperty = async (req, res) => {
-  const { title, price } = req.body;
+  const { title, price, description } = req.body;
 
   const reqFiles = [];
   req.files.forEach((file) => {
-    reqFiles.push(uploadUrl + "/uploads/" + file.filename);
+    reqFiles.push(process.env.UPLOAD_URL + "/uploads/" + file.filename);
   });
 
-  if (!(title && price)) {
+  if (!(title && price && description)) {
     return res.status(400).send("All input is required");
   }
 
-  const createProduct = await product.create({ title, price, image: reqFiles });
+  const createProduct = await product.create({
+    title,
+    price,
+    description,
+    image: reqFiles,
+  });
 
   res.json({
     result: createProduct,
